@@ -1,0 +1,60 @@
+.App {
+  background-color: #000020;
+  font-family: Courier;
+  min-height: 100vh;
+}
+
+.App-header {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+  font-size: calc(10px + 2vmin);
+  font-weight: bold;
+  color: #A0FFFF;
+}
+
+.App-identity {
+  display: flex;
+  flex-direction: column;
+  padding-left: 40px;
+  font-size: calc(10px + 2vmin);
+  color: #A0FFFF;
+}
+
+.userName {
+  color: gold;
+  font-weight: bold;
+}
+
+.inlineInput {
+  width: 18vh;
+  margin-left: 15px;
+  padding-left: 10px;
+  font-size: 100%;
+  background-color: transparent;
+  border: 2px solid #A0FFFF;
+  border-radius: 10px;
+  color: gold;
+  font-weight: bold;
+  font-family: Courier;
+}
+
+.inlineButton {
+  margin-left: 25px;
+  font-size: 100%;
+  background-color: transparent;
+  border: 2px solid #A0FFFF;
+  border-radius: 10px;
+  color: #70BFBF;
+}
+
+.headerSubtitle {
+  color: #90DFDF;
+  margin-top: 0px;
+  font-size: 60%;
+  font-style: italic;
+}
+
+.App-link {
+  color: #61dafb;
+}

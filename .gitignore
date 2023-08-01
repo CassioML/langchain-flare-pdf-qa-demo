@@ -1,3 +1,30 @@
+# API / GENERIC
+
 .env
 __pycache__
 sources/*pdf
+
+
+## CLIENT APP
+
+# dependencies
+/app/node_modules
+/app/.pnp
+.pnp.js
+
+# testing
+/app/coverage
+
+# production
+/app/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
