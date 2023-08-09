@@ -1,24 +1,32 @@
 import './App.css';
-import { /*useEffect,*/ useState } from "react"
+// import { /*useEffect,*/ useState } from "react"
+import { useForm } from "react-hook-form";
 
-import {UserDesc} from "../interfaces/interfaces";
+import {UserDesc, FileURLSubmission} from "../interfaces/interfaces";
 
-const AddFileForm = (props: UserDesc) => {
+const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
 
-  const {userId} = props;
+  const {userId, refreshFiles} = props;
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(`AddFileForm submitted`);
+  const {register, handleSubmit} = useForm<FileURLSubmission>();
+
+  const onSubmitHandler = (values: FileURLSubmission) => {
+    if (values.fileURL) {
+      console.log(`AddFileForm submitted, with ${values.fileURL}.`);
+      // TODO async call to submit the PDF to the api...
+      refreshFiles();
+    } else {
+      console.log(`AddFileForm submitted but EMPTY INPUT`);
+    }
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="form">
+    <form onSubmit={handleSubmit(onSubmitHandler)} className="form">
       <div>
-        <label htmlFor="fileUrl">File URL</label>
-        <input name="fileUrl" id="fileUrl" type="text" />
+        <label htmlFor="fileURL">File URL</label>
+        <input {...register("fileURL")} className="inlineInput" name="fileURL" id="fileURL" type="text" />
+        <button type="submit" className="inlineButton">Submit</button>
       </div>
-      <button type="submit">Submit</button>
     </form>
   );
 }

@@ -37,11 +37,11 @@ const Docs = (props: UserDesc) => {
         <p>wait...</p>
       }
       { querying ||
-        <div>RESULTS:
+        <div>RESULTS (<span onClick={refreshFiles}>Reload</span>):
           <ul>
-            { fileList.map( (f: string) => <li>{f}</li>) }
+            { fileList.map( (f: string) => <li id={f}>{f}</li>) }
           </ul>
-          <AddFileForm userId={userId} />
+          <AddFileForm userId={userId} refreshFiles={refreshFiles} />
         </div>
       }
     </div>
