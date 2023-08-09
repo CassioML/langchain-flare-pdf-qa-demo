@@ -2,6 +2,7 @@
 import './App.css';
 
 import Identity from './Identity';
+import SiteContents from './SiteContents';
 
 import { /*useEffect,*/ useState } from "react"
 
@@ -20,6 +21,9 @@ function App() {
           setUserId={setUserId}
         />
         <hr />
+        <SiteContents
+          userId={userId}
+        />
       </div>
     </div>
   );

@@ -21,6 +21,22 @@
   color: #A0FFFF;
 }
 
+.App-navbar {
+  padding-left: 40px;
+  font-size: calc(10px + 2vmin);
+  color: #A0FFFF;
+}
+
+.App-navbar a {
+  text-decoration: none;
+  color: white;
+  margin: 5px;
+}
+
+.App-navbar a:hover {
+  color: magenta;
+}
+
 .userName {
   color: gold;
   font-weight: bold;
