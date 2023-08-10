@@ -3,6 +3,7 @@ import './App.css';
 import { useForm } from "react-hook-form";
 
 import {UserDesc, FileURLSubmission} from "../interfaces/interfaces";
+import {submit_url_to_load} from "../utils/api_files";
 
 const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
 
@@ -13,8 +14,12 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
   const onSubmitHandler = (values: FileURLSubmission) => {
     if (values.fileURL) {
       console.log(`AddFileForm submitted, with ${values.fileURL}.`);
-      // TODO async call to submit the PDF to the api...
-      refreshFiles();
+      submit_url_to_load(
+        userId || "",
+        values.fileURL,
+        (s: string) => {console.log(`Gotten: ${s}`); refreshFiles(); },
+        (e: any) => {console.log(e);}
+      );
     } else {
       console.log(`AddFileForm submitted but EMPTY INPUT`);
     }

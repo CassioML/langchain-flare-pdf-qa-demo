@@ -65,7 +65,10 @@ def load_pdf_from_file(file_name, vector_store):
 def extract_file_title(file_url):
     try:
         pre, title = os.path.split(file_url)
-        return title
+        if "?" in title:
+            return title.split("?")[0]
+        else:
+            return title
     except:
         return "unnamed.pdf"
 
@@ -75,7 +78,7 @@ def load_pdf_from_url(file_url, vector_store):
     try:
         file_title = extract_file_title(file_url)
         pdf_file_path = os.path.join(tmp_dir, file_title)
-        urllib.urlretrieve(file_url, pdf_file_path)
+        request.urlretrieve(file_url, pdf_file_path)
         return load_pdf_from_file(pdf_file_path, vector_store)
     finally:
         shutil.rmtree(tmp_dir)
@@ -87,5 +90,5 @@ if __name__ == '__main__':
     em = get_embeddings()
     vs = get_vectorstore(em, se, ks)
     #
-    load_pdf_from_file("/home/stefano/Desktop/the_hobbit.pdf", vector_store=vs)
-    load_pdf_from_file("/home/stefano/Desktop/nausea.pdf", vector_store=vs)
+    load_pdf_from_url("https://github.com/hemidactylus/langchain-flare-pdf-qa-demo/blob/SL-app/sources/nausea.pdf?raw=true", vector_store=vs)
+    load_pdf_from_url("https://github.com/hemidactylus/langchain-flare-pdf-qa-demo/blob/SL-app/sources/the_hobbit.pdf?raw=true", vector_store=vs)
