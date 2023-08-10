@@ -2,7 +2,6 @@
 
 .env
 __pycache__
-sources/*pdf
 
 
 ## CLIENT APP
