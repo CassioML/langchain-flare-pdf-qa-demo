@@ -10,18 +10,18 @@ const Docs = (props: UserDesc) => {
 
   const {userId} = props;
 
-  const [querying, setQuerying] = useState(false);
+  const [queryState, setQueryState] = useState(0); // 0=nothing, 1=querying, 2=done, 3=error
   const [fileList, setFileList] = useState<string[]>([]);
 
   const refreshFiles = () => {
-    setQuerying(true);
+    setQueryState(1);
     get_loaded_files(
       userId || "",
       (r: string[]) => {
         setFileList(r);
-        setQuerying(false);
+        setQueryState(2);
       },
-      (e: any) => {console.log(e);}
+      (e: any) => {console.log(e); setQueryState(3);}
     );
   }
 
@@ -33,16 +33,22 @@ const Docs = (props: UserDesc) => {
   return (
     <div>
       DOCS FOR {userId}
-      { querying &&
+      { (queryState === 0) &&
+        <p>(nothing to see here)</p>
+      }
+      { (queryState === 1) &&
         <p>wait...</p>
       }
-      { querying ||
+      { (queryState === 2) &&
         <div>RESULTS (<span onClick={refreshFiles}>Reload</span>):
           <ul>
-            { fileList.map( (f: string) => <li id={f}>{f}</li>) }
+            { fileList.map( (f: string, i: number) => <li key={i}>{f}</li>) }
           </ul>
           <AddFileForm userId={userId} refreshFiles={refreshFiles} />
         </div>
+      }
+      { (queryState === 3) &&
+        <p>Error fetching docs</p>
       }
     </div>
   );
