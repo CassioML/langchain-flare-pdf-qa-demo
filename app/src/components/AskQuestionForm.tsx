@@ -1,9 +1,9 @@
 import './App.css';
-import { /*useEffect,*/ useState } from "react"
+// import { /*useEffect,*/ useState } from "react"
 import {v4 as uuidv4} from 'uuid';
 import { useForm } from "react-hook-form";
 
-import {UserDesc, QuestionSubmission, QuestionAndAnswer} from "../interfaces/interfaces";
+import {UserDesc, QuestionSubmission} from "../interfaces/interfaces";
 import {submit_question} from "../utils/api";
 
 const AskQuestionForm = (props: UserDesc & {completeQuestion: (q_id: string, answer: string|undefined) => void , addQuestion: (q_id: string, question: string) => void;}) => {

@@ -106,10 +106,11 @@ def load_pdf_from_url(file_url, vector_store):
         file_title = extract_file_title(file_url)
         pdf_file_path = os.path.join(tmp_dir, file_title)
         request.urlretrieve(file_url, pdf_file_path)
-        return load_pdf_from_file(pdf_file_path, vector_store)
+        return load_pdf_from_file(pdf_file_path, vector_store), file_title
+    except:
+        return None, None
     finally:
         shutil.rmtree(tmp_dir)
-        return None
 
 
 # if __name__ == '__main__':
