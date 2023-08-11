@@ -32,3 +32,22 @@ export const submit_url_to_load = (userId: string, fileURL: string, callback: an
     }
   });
 }
+
+export const submit_question = (userId: string, question_id: string, question: string, callback: any, error_callback: any) => {
+  axios.post(
+    'http://127.0.0.1:8000/flare_ask',
+    {
+      user_id: userId,
+      question_id: question_id,
+      question: question,
+    }
+  )
+  .then((response: any) => {
+    callback(response.data);
+  })
+  .catch((error: any) => {
+    if(error_callback){
+      error_callback(error);
+    }
+  });
+}

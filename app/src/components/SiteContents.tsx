@@ -8,6 +8,7 @@ import {UserDesc} from "../interfaces/interfaces";
 
 import Home from "./Home";
 import Docs from "./Docs";
+import Query from "./Query";
 
 const SiteContents = ({userId}: UserDesc) => {
   return (
@@ -21,6 +22,8 @@ const SiteContents = ({userId}: UserDesc) => {
                 |
                 <Link to="/docs">My docs</Link>
                 |
+                <Link to="/query">Ask questions</Link>
+                |
               </p>
             </div>
 
@@ -29,6 +32,10 @@ const SiteContents = ({userId}: UserDesc) => {
               <Route
                 path="/docs"
                 element={<Docs userId={userId} />}
+              />
+              <Route
+                path="/query"
+                element={<Query userId={userId} />}
               />
             </Routes>
 

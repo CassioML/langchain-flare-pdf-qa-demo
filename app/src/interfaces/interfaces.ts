@@ -12,3 +12,13 @@ export interface UserDesc {
 export interface FileURLSubmission {
   fileURL: string;
 }
+
+export interface QuestionSubmission {
+  question: string;
+}
+
+export interface QuestionAndAnswer {
+  question: string;
+  answer: string | undefined;
+  question_id: string;
+}

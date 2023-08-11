@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from "react"
 
 import {UserDesc} from "../interfaces/interfaces";
-import {get_loaded_files} from "../utils/api_files";
+import {get_loaded_files} from "../utils/api";
 
 import AddFileForm from "./AddFileForm";
 
