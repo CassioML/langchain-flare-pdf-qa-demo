@@ -1,6 +1,6 @@
-cassio==0.0.7
+cassio>=0.1.0
 fastapi==0.99.1
-langchain==0.0.225
+langchain>=0.0.274
 openai==0.27.8
 pypdf==3.12.0
 tiktoken==0.4.0

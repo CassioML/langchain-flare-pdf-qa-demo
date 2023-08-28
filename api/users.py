@@ -12,8 +12,8 @@ def get_user_store(db, ks):
     global userStore
     if userStore is None:
         userStore = ClusteredCassandraTable(
-            db,
-            ks,
+            session=db,
+            keyspace=ks,
             table=USER_TABLE_NAME,
             primary_key_type=["TEXT", "TIMEUUID"],
             ordering_in_partition="DESC",

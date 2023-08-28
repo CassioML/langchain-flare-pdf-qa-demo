@@ -111,13 +111,3 @@ def load_pdf_from_url(file_url, vector_store):
         return None, None
     finally:
         shutil.rmtree(tmp_dir)
-
-
-# if __name__ == '__main__':
-#     from db import get_astra
-#     se, ks = get_astra()
-#     em = get_embeddings()
-#     vs = get_vectorstore(em, se, ks)
-#     #
-#     load_pdf_from_url("https://github.com/hemidactylus/langchain-flare-pdf-qa-demo/blob/SL-app/sources/nausea.pdf?raw=true", vector_store=vs)
-#     load_pdf_from_url("https://github.com/hemidactylus/langchain-flare-pdf-qa-demo/blob/SL-app/sources/the_hobbit.pdf?raw=true", vector_store=vs)
