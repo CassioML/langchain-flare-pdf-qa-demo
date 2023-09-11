@@ -21,7 +21,7 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
         userId || "",
         values.fileURL,
         (response: any) => {
-          console.log(`Gotten: ${response}`);
+          console.log(`Gotten: ${JSON.stringify(response)}`);
           if (response.success){
             setSubmitState(0);
             console.log(`Written ${response.n_rows} rows to vector table.`);

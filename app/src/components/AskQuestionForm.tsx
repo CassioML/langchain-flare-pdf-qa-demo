@@ -25,7 +25,7 @@ const AskQuestionForm = (props: UserDesc & {completeQuestion: (q_id: string, ans
         q_id,
         values.question,
         (response: any) => {
-          console.log(`Gotten: ${response}`);
+          console.log(`Gotten: ${JSON.stringify(response)}`);
           if (response.success){
             console.log(`Answer to ${q_id}: ${response.answer}`);
             completeQuestion(q_id, response.answer);

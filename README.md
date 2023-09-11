@@ -35,6 +35,12 @@ When that has completed,
 npm start
 ```
 
+or if necessary
+
+```
+REACT_APP_API_BASE_URL="http://something..." npm start
+```
+
 and point your browser to local port 3000.
 
 #### User journey
@@ -54,15 +60,9 @@ https://github.com/CassioML/langchain-flare-pdf-qa-demo/blob/main/sources/nausea
 https://github.com/CassioML/langchain-flare-pdf-qa-demo/blob/main/sources/the_hobbit.pdf?raw=true
 ```
 
-Example questions (one positive, one negative):
+Example questions (one positive, one negative - on "nausea.pdf"):
 
 ```
 What about the chestnut?
 What about the oak?
 ```
-
-## TODOs and Caveats
-
-No support for partitioning yet in the vector store.
-As a result, every "user" would get their answers from the whole ingested corpus.
-_The fix here is to implement optional partitioning support throughout the LangChain integration._

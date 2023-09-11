@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState } from "react"
 
 import {UserDesc} from "../interfaces/interfaces";
-import {get_loaded_files} from "../utils/api";
+import {get_loaded_files, remove_file} from "../utils/api";
 
 import AddFileForm from "./AddFileForm";
 
@@ -25,6 +25,20 @@ const Docs = (props: UserDesc) => {
     );
   }
 
+  const removeFile = (file_name: string) => {
+    console.log(`Removing ${file_name}`);
+    setQueryState(1);
+    remove_file(
+      userId || "",
+      file_name,
+      (r: any) => {
+        console.log(`Removed ${r.num_deleted} entries.`);
+        refreshFiles();
+      },
+      (e: any) => {console.log(e); setQueryState(3);}
+    );
+  }
+
   useEffect(
     refreshFiles,
     [userId]
@@ -42,7 +56,10 @@ const Docs = (props: UserDesc) => {
       { (queryState === 2) &&
         <div>RESULTS (<span onClick={refreshFiles}>Reload</span>):
           <ul>
-            { fileList.map( (f: string, i: number) => <li key={i}>{f}</li>) }
+            { fileList.map( (f: string, i: number) => <li key={i}>
+              {f}
+            &nbsp;<span onClick={(e) => removeFile(f)}>[DEL]</span>
+            </li>) }
           </ul>
           <AddFileForm userId={userId} refreshFiles={refreshFiles} />
         </div>

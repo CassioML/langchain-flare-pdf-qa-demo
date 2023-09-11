@@ -1,7 +1,5 @@
 # Cassio interaction with the DB
 
-import uuid
-
 from cassio.table import ClusteredCassandraTable
 
 USER_TABLE_NAME = "flare_users"
@@ -15,8 +13,8 @@ def get_user_store(db, ks):
             session=db,
             keyspace=ks,
             table=USER_TABLE_NAME,
-            primary_key_type=["TEXT", "TIMEUUID"],
-            ordering_in_partition="DESC",
+            primary_key_type=["TEXT", "TEXT"],
+            ordering_in_partition="ASC",
         )
     return userStore
 
@@ -29,9 +27,14 @@ def files_for_user(user_store, user_id):
     ]
 
 def add_file_to_user(user_store, user_id, file_name):
-    entry_id = uuid.uuid1()
     user_store.put(
         partition_id=user_id,
-        row_id=entry_id,
-        body_blob=file_name
+        row_id=file_name,
+        body_blob=file_name,
+    )
+
+def delete_file_from_user(user_store, user_id, file_name):
+    user_store.delete(
+        partition_id=user_id,
+        row_id=file_name,
     )

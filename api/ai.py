@@ -13,9 +13,7 @@ from langchain.chat_models import ChatOpenAI
 VECTOR_PDF_TABLE_NAME = "flare_doc_bank"
 
 embeddingService = None
-vectorStore = None
 chatModel = None
-flareChain = None
 
 
 def get_chat_model():
@@ -26,15 +24,13 @@ def get_chat_model():
 
 
 def get_flare_chain(chmodel, vstore):
-    global flareChain
-    if flareChain is None:
-        retriever = vstore.as_retriever()
-        flareChain = FlareChain.from_llm(
-            chmodel,
-            retriever=retriever,
-            max_generation_len=164,
-            min_prob=0.3,
-        )
+    retriever = vstore.as_retriever()
+    flareChain = FlareChain.from_llm(
+        chmodel,
+        retriever=retriever,
+        max_generation_len=164,
+        min_prob=0.3,
+    )
     return flareChain
 
 
@@ -45,15 +41,23 @@ def get_embeddings():
     return embeddingService
 
 
-def get_vectorstore(embeddings, db, ks):
-    global vectorStore
-    if vectorStore is None:
-        vectorStore = Cassandra(
-            embedding=embeddings,
-            session=db,
-            keyspace=ks,
-            table_name=VECTOR_PDF_TABLE_NAME,
-        )
+def get_vectorstore(embeddings, db, ks, user_id=None):
+    """
+    if user_id is None,
+        we assume this is an init call:
+        we require table provisioning (and pass a made-up user id)
+    if user_id is passed:
+        we spawn a no-provision instance set to that partition
+    """
+    vectorStore = Cassandra(
+        embedding=embeddings,
+        session=db,
+        keyspace=ks,
+        table_name=VECTOR_PDF_TABLE_NAME,
+        partition_id="placeholder" if user_id is None else user_id,
+        partitioned=True,
+        skip_provisioning=user_id is not None,
+    )
     return vectorStore
 
 # PDF loading machinery
