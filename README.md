@@ -21,9 +21,12 @@ You need:
 
 ## How-to (Gitpod)
 
-Click this button and wait for the prompt (on the left-hand console) asking
-you the secrets. Enter them, press Enter and wait: the app will open
-in the top panel.
+Click this button, confirm opening of the workspace
+(you might need a Gitpod login in the process) and wait a little
+for a prompt saying that you can run `scripts/launch_api.sh`.
+Do so and provide the secrets when prompted.
+
+In the meantime, the app will open in the top panel.
 
 <a href="https://gitpod.io/#https://github.com/cassioml/langchain-flare-pdf-qa-demo"><img src="images/open_in_gitpod.svg" /></a>
 
