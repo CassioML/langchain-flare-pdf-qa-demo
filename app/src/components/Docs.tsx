@@ -47,7 +47,6 @@ const Docs = (props: UserDesc) => {
 
   return (
     <div>
-      DOCS FOR {userId}
       { (queryState === "initialized") &&
         <p>(nothing to see here)</p>
       }
@@ -55,13 +54,14 @@ const Docs = (props: UserDesc) => {
         <p>wait...</p>
       }
       { (queryState === "completed") &&
-        <div>RESULTS (<span onClick={refreshFiles}>Reload</span>):
-          <ul>
+        <div>{userId}'s docs <button onClick={refreshFiles} className="inlineButton">&#x21bb; Reload</button>
+          <ul className="fileList">
             { fileList.map( (f: string, i: number) => <li key={i}>
               {f}
-            &nbsp;<span onClick={(e) => removeFile(f)}>[DEL]</span>
+            <button className="inlineButton" onClick={(e) => removeFile(f)}>&#128465; Delete</button>
             </li>) }
           </ul>
+          <hr />
           <AddFileForm userId={userId} refreshFiles={refreshFiles} />
         </div>
       }

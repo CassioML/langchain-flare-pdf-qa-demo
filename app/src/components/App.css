@@ -55,6 +55,19 @@
   font-family: Courier;
 }
 
+.inlineInputLong {
+  width: 50%;
+  margin-left: 15px;
+  padding-left: 10px;
+  font-size: 100%;
+  background-color: transparent;
+  border: 2px solid #A0FFFF;
+  border-radius: 10px;
+  color: gold;
+  font-weight: bold;
+  font-family: Courier;
+}
+
 .inlineButton {
   margin-left: 25px;
   font-size: 100%;
@@ -71,6 +84,44 @@
   font-style: italic;
 }
 
+.urlExamples {
+  margin: 3vh 10vh;
+  border-radius: 12px;
+  padding: 8px;
+  border: 2px solid gold;
+  font-size: 66%;
+}
+
+.urlExamples .urlExample {
+  font-weight: bold;
+}
+
+ul.fileList {
+  list-style-type: none;
+}
+
+.fileList > li {
+  margin-left: 3vh;
+  font-weight: bold;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.questionBlock {
+  margin: 3vh 3vh;
+  border-radius: 12px;
+  padding: 12px 30px;
+  border: 2px solid gold;
+  font-size: 80%;
+}
+
+.questionBlock > .questionBody {
+  color: magenta;
+}
+
+.questionBlock > .answerBody {
+  color: gold;
+  font-weight: bold;
 }

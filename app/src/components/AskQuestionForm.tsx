@@ -46,7 +46,7 @@ const AskQuestionForm = (props: UserDesc & {completeQuestion: (q_id: string, ans
       <form onSubmit={handleSubmit(onSubmitHandler)} className="form">
         <div>
           <label htmlFor="question">Ask a question:</label>
-          <input {...register("question")} className="inlineInput" name="question" id="question" type="text" />
+          <input {...register("question")} className="inlineInputLong" name="question" id="question" type="text" />
           <button type="submit" className="inlineButton">Ask</button>
         </div>
       </form>

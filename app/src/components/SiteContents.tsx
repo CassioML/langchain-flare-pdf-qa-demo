@@ -20,7 +20,6 @@ const SiteContents = ({userId}: UserDesc) => {
                 <Link to="/docs">My docs</Link>
                 |
                 <Link to="/query">Ask questions</Link>
-                |
               </p>
             </div>
 

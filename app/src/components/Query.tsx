@@ -11,10 +11,10 @@ const Query = (props: UserDesc) => {
   const [history, setHistory] = useState<QuestionAndAnswer[]>([]);
 
   const completeQuestion = (q_id: string, answer: string | undefined) => {
-    console.log(`completing ${q_id} with ${answer || "ERRORED"}`);
+    console.log(`completing ${q_id} with ${answer}`);
     setHistory( (h) => h.map( q => {
       if (q.question_id === q_id){
-        return {...q, ...{answer: (answer || "ERRORED")}};
+        return {...q, ...{answer: answer}};
       }else{
         return q;
       }
@@ -32,12 +32,15 @@ const Query = (props: UserDesc) => {
   return (
     <div>
       <AskQuestionForm userId={userId} completeQuestion={completeQuestion} addQuestion={addQuestion} />
-      <p>Your past questions:</p>
-      <ul>
-        { history.slice().reverse().map( q => <li key={q.question_id}>
-          {q.question} : <i>{q.answer || "(unanswered...)"}</i>
-        </li>) }
-      </ul>
+      { ( (history.length > 0) && <>
+          <p>Question history:</p>
+          { history.slice().reverse().map( q =>
+            <div className="questionBlock" key={q.question_id}>
+              <p className="questionBody">{q.question}</p>
+              <p className="answerBody">{q.answer === undefined ? "⌛" : q.answer || "(no answer)"}</p>
+            </div>
+          ) }
+      </> ) }
     </div>
   );
 }

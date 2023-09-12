@@ -14,6 +14,8 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
 
   const [submitState, setSubmitState] = useState<RequestStatus>("initialized");
 
+  const [showExampleUrls, setShowExampleUrls] = useState(false);
+
   const onSubmitHandler = (values: FileURLSubmission) => {
     if (values.fileURL) {
       setSubmitState("in_flight");
@@ -39,6 +41,10 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
     }
   };
 
+  const toggleExampleUrls = () => {
+    setShowExampleUrls( (v) => !v );
+  }
+
   if (submitState === "initialized" || submitState === "errored" || submitState === "completed"){
     return (
       <div>
@@ -49,10 +55,23 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
         }
         <form onSubmit={handleSubmit(onSubmitHandler)} className="form">
           <div>
-            <label htmlFor="fileURL">File URL</label>
-            <input {...register("fileURL")} className="inlineInput" name="fileURL" id="fileURL" type="text" />
+            <label htmlFor="fileURL">
+              Load new from URL:
+              <span onClick={ toggleExampleUrls }>&#128712;</span>
+            </label>
+            <input {...register("fileURL")} className="inlineInputLong" name="fileURL" id="fileURL" type="text" />
             <button type="submit" className="inlineButton">Submit</button>
           </div>
+          { ( showExampleUrls &&
+            <div className="urlExamples">
+              Example submissions:
+              <ul>
+                <li className="urlExample">https://github.com/CassioML/langchain-flare-pdf-qa-demo/blob/main/sources/nausea.pdf?raw=true</li>
+                <li className="urlExample">https://github.com/CassioML/langchain-flare-pdf-qa-demo/blob/main/sources/the_hobbit.pdf?raw=true</li>
+                <li className="urlExample">https://arxiv.org/pdf/1311.3081.pdf</li>
+              </ul>
+            </div> )
+          }
         </form>
       </div>
     );
