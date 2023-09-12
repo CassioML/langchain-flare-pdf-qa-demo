@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from "react"
 import {UserDesc, QuestionAndAnswer} from "../interfaces/interfaces";
 
+import {QAMode} from "../interfaces/enums";
 import AskQuestionForm from "./AskQuestionForm";
 
 const Query = (props: UserDesc) => {
@@ -20,12 +21,13 @@ const Query = (props: UserDesc) => {
       }
     }));
   }
-  const addQuestion = (q_id: string, question: string) => {
+  const addQuestion = (q_id: string, qaMode: QAMode, question: string) => {
     console.log(`adding ${q_id}: ${question}`);
     setHistory( (h) => h.concat( [{
       question_id: q_id,
       question: question,
       answer: undefined,
+      qa_mode: qaMode,
     }] ));
   }
 
@@ -36,7 +38,10 @@ const Query = (props: UserDesc) => {
           <p>Question history:</p>
           { history.slice().reverse().map( q =>
             <div className="questionBlock" key={q.question_id}>
-              <p className="questionBody">{q.question}</p>
+              <p className="questionBody">
+                {q.question}
+                <span className="QAMode">{q.qa_mode}</span>
+              </p>
               <p className="answerBody">{q.answer === undefined ? "⌛" : q.answer || "(no answer)"}</p>
             </div>
           ) }

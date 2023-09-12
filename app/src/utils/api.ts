@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import {QAMode} from "../interfaces/enums";
+
 const base_url: string = process.env["REACT_APP_API_BASE_URL"] || "http://127.0.0.1:8000";
 
 export const get_loaded_files = (userId: string, callback: any, error_callback: any) => {
@@ -51,9 +53,18 @@ export const submit_url_to_load = (userId: string, fileURL: string, callback: an
   });
 }
 
-export const submit_question = (userId: string, question_id: string, question: string, callback: any, error_callback: any) => {
+export const submit_question = (qaMode: QAMode, userId: string, question_id: string, question: string, callback: any, error_callback: any) => {
+  let endpoint: string
+  if (qaMode === "FLARE") {
+    endpoint = "flare_ask";
+  } else if (qaMode === "RAG") {
+    endpoint = "rag_ask";
+  } else{ // qaMode === "SIMPLE"
+    endpoint = "llm_ask";
+  }
+  //
   axios.post(
-    `${base_url}/flare_ask`,
+    `${base_url}/${endpoint}`,
     {
       user_id: userId,
       question_id: question_id,

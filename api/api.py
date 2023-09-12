@@ -5,12 +5,26 @@ from pydantic import BaseModel
 
 from utils.localCORS import permitReactLocalhostClient
 from db import get_astra
-from ai import get_embeddings, get_vectorstore, load_pdf_from_url, get_chat_model, get_flare_chain
-from users import get_user_store, files_for_user, add_file_to_user, delete_file_from_user
+from ai import (
+    get_embeddings,
+    get_vectorstore,
+    load_pdf_from_url,
+    get_chat_model,
+    get_flare_chain,
+    get_llm,
+    get_rag_index,
+)
+from users import (
+    get_user_store,
+    files_for_user,
+    add_file_to_user,
+    delete_file_from_user,
+)
 
 db, keyspace = get_astra()
 embeddings = get_embeddings()
 chatmodel = get_chat_model()
+llm = get_llm()
 user_store = get_user_store(db, keyspace)
 
 class ListFileRequest(BaseModel):
@@ -90,12 +104,45 @@ def remove_pdf(payload: RemovePDFRequest):
 
 @app.post('/flare_ask')
 def flare_ask(payload: QuestionRequest):
-    import time
     try:
         vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=payload.user_id)
         flarechain_u = get_flare_chain(chatmodel, vectorstore_u)
         result = flarechain_u.run(payload.question)
-        #
+        return {
+            "question_id": payload.question_id,
+            "success": True,
+            "answer": result,
+        }
+    except Exception as e:
+        return {
+            "question_id": payload.question_id,
+            "success": False,
+            "error": str(e),
+        }
+
+
+@app.post('/rag_ask')
+def llm_ask(payload: QuestionRequest):
+    try:
+        rag_index = get_rag_index(embeddings, db, keyspace, user_id=payload.user_id)
+        result = rag_index.query(payload.question, llm=llm).strip()
+        return {
+            "question_id": payload.question_id,
+            "success": True,
+            "answer": result,
+        }
+    except Exception as e:
+        return {
+            "question_id": payload.question_id,
+            "success": False,
+            "error": str(e),
+        }
+
+
+@app.post('/llm_ask')
+def llm_ask(payload: QuestionRequest):
+    try:
+        result = llm(payload.question).strip()
         return {
             "question_id": payload.question_id,
             "success": True,
