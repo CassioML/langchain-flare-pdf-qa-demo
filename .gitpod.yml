@@ -16,7 +16,7 @@ tasks:
       #gp open README.md
   - name: app-console
     openMode: split-right
-    before:
+    before: |
       cd /workspace/langchain-flare-pdf-qa-demo/app
       #nvm install 16.13.0
       #npm install -g npm@latest
