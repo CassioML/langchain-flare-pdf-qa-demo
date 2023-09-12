@@ -2,8 +2,8 @@ tasks:
   - name: api-console
     before: |
       cd /workspace/langchain-flare-pdf-qa-demo
-      mkdir gitpod_logs
-      curl -Ls "https://dtsx.io/get-astra-cli" | bash | tee -a gitpod_logs/astra-cli-install.log
+      mkdir .gitpod_logs
+      curl -Ls "https://dtsx.io/get-astra-cli" | bash | tee -a /workspace/langchain-flare-pdf-qa-demo.gitpod_logs/astra-cli-install.log
     command: |
       source /home/gitpod/.astra/cli/astra-init.sh
       clear
@@ -26,7 +26,7 @@ tasks:
       REACT_APP_API_BASE_URL=`gp url 8000` npm start
 ports:
   - port: 3000
-    onOpen: open-browser
+    onOpen: open-preview
   - port: 8000
     onOpen: ignore
     visibility: public

@@ -1,68 +1,73 @@
 # PDF FLARE demo with Langchain and Cassandra as Vector Store
 
-Ingest your PDFs and use FLARE for sophisticated multi-step question answering
-over the documents' content.
+## What
 
-## How-to
+Ingest PDF files from their URL into an Astra DB vector store
+and run FLARE Question-Answering on them.
 
-Python `3.8+` (suggested: a virtual environment).
+Features:
 
-Install the dependencies in `requirements.txt`.
+- Python API (CassIO, LangChain, FastAPI) + React client (Typescript)
+- per-user store of ingested documents
+- Other Q-A methods in comparison
+- Start-with-a-click on Gitpod
 
-Get an [Astra DB](https://astra.datastax.com) vector database (for free), download the Secure Connect Bundle and get a DB Administrator token.
-(More info [here](https://cassio.org/start_here/#create-the-database).)
+## Prerequisites
 
-Get an OpenAI API Key.
-(More info [here](https://cassio.org/start_here/#llm-access), note that out-of-the-box this demo supports OpenAI unless you tinker with the code.)
+You need:
 
-### Start API
+- an [Astra](https://astra.datastax.com) Vector Database (free tier is fine!). **You'll be asked to supply a [Database Administrator token](https://awesome-astra.github.io/docs/pages/astra/create-token/#c-procedure)**;
+- an **OpenAI API Key**. (More info [here](https://cassio.org/start_here/#llm-access), note that out-of-the-box this demo supports OpenAI unless you tinker with the code.)
 
-Copy `cp .env.template .env` and set the secrets. Then `. .env`
+## How-to (Gitpod)
 
-Now, in this shell, go to the `api` directory and launch
+Click this button and wait for the prompt (on the left-hand console) asking
+you the secrets. Enter them, press Enter and wait: the app will open
+in the top panel.
+
+<a href="https://gitpod.io/#https://github.com/cassioml/langchain-flare-pdf-qa-demo"><img src="images/open_in_gitpod.svg" /></a>
+
+## How-to (local run)
+
+### API
+
+Create a Python `3.8+` virtual environment and install
+the dependencies in `requirements.txt`.
+
+Make a copy `cp .env.template .env` and set the secrets for your DB and OpenAI.
+
+Finally enter the subdirectory and launch the API:
 
 ```
+cd api
 uvicorn api:app
 ```
 
-### Start the UI
+### Client
 
-In a separate console, go to the `app` directory and `npm install`.
+You need a modern Node.js. Enter the subdirectory and install the dependencies:
 
-When that has completed,
+```
+cd app
+npm install
+```
+
+If the API is running you can launch the client:
 
 ```
 npm start
 ```
 
-or if necessary
-
-```
-REACT_APP_API_BASE_URL="http://something..." npm start
-```
-
 and point your browser to local port 3000.
+
+_(Note: if the API run elsewhere, you can launch `REACT_APP_API_BASE_URL="http://something..." npm start`.)_
 
 #### User journey
 
-First you "log in".
+First, "log in" (mocked) with a made-up username.
 
-Then you load pdf by passing URLs to them.
+Then you access the panel. Go to the "Docs" panel, where you can load pdf files
+by entering their URL (click on the "i" icon to get example URLs to paste).
 
-Then you try to get questions answered.
-
-#### Examples
-
-Example valid URL to PDF files you can pass are:
-
-```
-https://github.com/CassioML/langchain-flare-pdf-qa-demo/blob/main/sources/nausea.pdf?raw=true
-https://github.com/CassioML/langchain-flare-pdf-qa-demo/blob/main/sources/the_hobbit.pdf?raw=true
-```
-
-Example questions (one positive, one negative - on "nausea.pdf"):
-
-```
-What about the chestnut?
-What about the oak?
-```
+You can "Ask questions", comparing different methods (FLARE/RAG/Plain LLM) and
+their answers.
