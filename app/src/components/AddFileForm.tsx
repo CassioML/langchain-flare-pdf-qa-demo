@@ -56,8 +56,7 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
         <form onSubmit={handleSubmit(onSubmitHandler)} className="form">
           <div>
             <label htmlFor="fileURL">
-              Load new from URL:
-              <span onClick={ toggleExampleUrls }>&#128712;</span>
+              Load new from URL: <span onClick={ toggleExampleUrls }>&#128712;</span>
             </label>
             <input {...register("fileURL")} className="inlineInputLong" name="fileURL" id="fileURL" type="text" />
             <button type="submit" className="inlineButton">Submit</button>

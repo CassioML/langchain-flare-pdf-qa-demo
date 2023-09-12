@@ -42,6 +42,14 @@
   cursor: pointer;
 }
 
+.fileSourceUrl:visited {
+  color: gold;
+}
+
+.fileSourceUrl {
+  color: magenta;
+}
+
 .App-body {
   margin-top: 20px;
   padding-left: 30px;
@@ -97,7 +105,7 @@
 }
 
 .urlExamples {
-  margin: 3vh 10vh;
+  margin: 3vh 3vh;
   border-radius: 12px;
   padding: 8px;
   border: 2px solid gold;

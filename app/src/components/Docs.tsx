@@ -57,7 +57,7 @@ const Docs = (props: UserDesc) => {
         <div>{userId}'s docs <button onClick={refreshFiles} className="inlineButton">&#x21bb; Reload</button>
           <ul className="fileList">
             { fileList.map( (f: FileItem) => <li key={f.name}>
-              {f.name} (<a href={f.url} target="blank;">source</a>)
+              {f.name} (<a href={f.url} target="blank;" className="fileSourceUrl">source</a>)
             <button className="inlineButton" onClick={(e) => removeFile(f.name)}>&#128465; Remove</button>
             </li>) }
           </ul>

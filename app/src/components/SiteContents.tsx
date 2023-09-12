@@ -1,16 +1,13 @@
-import { useState } from "react"
-
 import './App.css';
 import {UserDesc} from "../interfaces/interfaces";
-import {SitePage} from "../interfaces/enums";
 
 import Home from "./Home";
 import Docs from "./Docs";
 import Query from "./Query";
 
-const SiteContents = ({userId}: UserDesc) => {
+const SiteContents = (props: UserDesc & {page: any, setPage: any}) => {
 
-  const [page, setPage] = useState<SitePage>("home");
+  const {userId, page, setPage} = props;
 
   return (
     <div className="App-contents">

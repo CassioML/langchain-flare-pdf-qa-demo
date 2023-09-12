@@ -10,10 +10,9 @@ export interface UserProps {
 }
 
 
-const Identity = (props: UserProps) => {
+const Identity = (props: {userId: any, setUserId: any, setPage: any}) => {
 
-  const userId = props.userId;
-  const setUserId = props.setUserId;
+  const {userId, setUserId, setPage} = props;
 
   const [editUserId, setEditUserId] = useState('');
 
@@ -21,6 +20,7 @@ const Identity = (props: UserProps) => {
   const trySetUserId = (newUserId: string) => {
     if(newUserId){
       setUserId(newUserId);
+      setPage("home");
     }
   }
 
