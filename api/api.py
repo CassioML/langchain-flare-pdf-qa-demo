@@ -56,7 +56,7 @@ def load_pdf_url(payload: LoadPDFRequest):
         vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=payload.user_id)
         n_rows, file_name = load_pdf_from_url(payload.file_url, vectorstore_u)
         if n_rows is not None:
-            add_file_to_user(user_store, payload.user_id, file_name)
+            add_file_to_user(user_store, payload.user_id, file_name, payload.file_url)
             return {
                 "success": True,
                 "n_rows": n_rows,

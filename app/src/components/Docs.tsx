@@ -1,7 +1,7 @@
 import './App.css';
 import { useEffect, useState } from "react"
 
-import {UserDesc} from "../interfaces/interfaces";
+import {UserDesc, FileItem} from "../interfaces/interfaces";
 import {RequestStatus} from "../interfaces/enums";
 import {get_loaded_files, remove_file} from "../utils/api";
 
@@ -12,13 +12,13 @@ const Docs = (props: UserDesc) => {
   const {userId} = props;
 
   const [queryState, setQueryState] = useState<RequestStatus>("initialized");
-  const [fileList, setFileList] = useState<string[]>([]);
+  const [fileList, setFileList] = useState<FileItem[]>([]);
 
   const refreshFiles = () => {
     setQueryState("in_flight");
     get_loaded_files(
       userId || "",
-      (r: string[]) => {
+      (r: FileItem[]) => {
         setFileList(r);
         setQueryState("completed");
       },
@@ -56,9 +56,9 @@ const Docs = (props: UserDesc) => {
       { (queryState === "completed") &&
         <div>{userId}'s docs <button onClick={refreshFiles} className="inlineButton">&#x21bb; Reload</button>
           <ul className="fileList">
-            { fileList.map( (f: string, i: number) => <li key={i}>
-              {f}
-            <button className="inlineButton" onClick={(e) => removeFile(f)}>&#128465; Delete</button>
+            { fileList.map( (f: FileItem) => <li key={f.name}>
+              {f.name} (<a href={f.url} target="blank;">source</a>)
+            <button className="inlineButton" onClick={(e) => removeFile(f.name)}>&#128465; Remove</button>
             </li>) }
           </ul>
           <hr />

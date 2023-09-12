@@ -24,11 +24,11 @@ const Identity = (props: UserProps) => {
     }
   }
 
-  return (
+  return ( <>
     <div className="App-identity">
       { !userId && <div>
         <p>
-          Who are you?
+          PDF FLARE demo - Who are you?
           <input
             className="inlineInput"
             type="text"
@@ -47,7 +47,7 @@ const Identity = (props: UserProps) => {
       </div>}
       { userId && <div>
         <p>
-          Welcome, <span className="userName">{userId}</span>
+          PDF FLARE demo - Welcome, <span className="userName">{userId}</span>
 
           <button
             onClick={() => {
@@ -62,7 +62,7 @@ const Identity = (props: UserProps) => {
 
       </div>}
     </div>
-  );
+  </> );
 }
 
 export default Identity

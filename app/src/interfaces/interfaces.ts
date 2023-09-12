@@ -17,3 +17,8 @@ export interface QuestionAndAnswer {
   answer: string | undefined;
   question_id: string;
 }
+
+export interface FileItem {
+  name: string;
+  url: string;
+}

@@ -1,4 +1,5 @@
 # Cassio interaction with the DB
+import json
 
 from cassio.table import ClusteredCassandraTable
 
@@ -20,17 +21,18 @@ def get_user_store(db, ks):
 
 def files_for_user(user_store, user_id):
     return [
-        row["body_blob"]
+        json.loads(row["body_blob"])
         for row in user_store.get_partition(
             partition_id=user_id,
         )
     ]
 
-def add_file_to_user(user_store, user_id, file_name):
+def add_file_to_user(user_store, user_id, file_name, file_url):
+    blob = json.dumps({"name": file_name, "url": file_url})
     user_store.put(
         partition_id=user_id,
         row_id=file_name,
-        body_blob=file_name,
+        body_blob=blob,
     )
 
 def delete_file_from_user(user_store, user_id, file_name):

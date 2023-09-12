@@ -12,15 +12,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>PDF FLARE demo</p>
-      </header>
-      <div className="App-body">
+      <div className="App-header">
         <Identity
           userId={userId}
           setUserId={setUserId}
         />
-        <hr />
+      </div>
+      <hr />
+      <div className="App-body">
         <SiteContents
           userId={userId}
         />
