@@ -13,6 +13,7 @@ tasks:
       /workspace/langchain-flare-pdf-qa-demo/scripts/ingest_openai_key.sh /workspace/langchain-flare-pdf-qa-demo/.env
       cd /workspace/langchain-flare-pdf-qa-demo/api
       pip install -r requirements.txt
+      uvicorn api:app
       #gp open README.md
   - name: app-console
     openMode: split-right
