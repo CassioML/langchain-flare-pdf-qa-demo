@@ -61,7 +61,7 @@ const Docs = (props: UserDesc) => {
             <button className="inlineButton" onClick={(e) => removeFile(f.name)}>&#128465; Remove</button>
             </li>) }
           </ul>
-          <hr />
+          <hr className="fancy" />
           <AddFileForm userId={userId} refreshFiles={refreshFiles} />
         </div>
       }

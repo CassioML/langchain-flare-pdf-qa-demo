@@ -1,5 +1,5 @@
 .App {
-  background-color: #000020;
+  background-color: #6599cc;
   font-family: Courier;
   min-height: 100vh;
 }
@@ -9,30 +9,19 @@
   flex-direction: column;
   font-size: 120%;
   font-weight: bold;
-  color: #A0FFFF;
+/*  color: #ffffff;*/
 }
 
 .App-identity {
   display: flex;
   flex-direction: column;
   padding-left: 40px;
-  color: #A0FFFF;
+  color: #12386f;
 }
 
 .App-navbar {
   padding-left: 10px;
-  color: #A0FFFF;
-}
-
-.App-navbar a {
-  text-decoration: none;
-  font-size: 120%;
-  color: white;
-  margin: 5px;
-}
-
-.App-navbar a:hover {
-  color: magenta;
+/*  color: #A0FFFF;*/
 }
 
 .App-navbar span {
@@ -40,24 +29,29 @@
   font-weight: bold;
   margin: 1vh;
   cursor: pointer;
+  color: #A0FFFF;
 }
 
 .fileSourceUrl:visited {
-  color: gold;
+  color: #A0FFFF;
 }
 
 .fileSourceUrl {
-  color: magenta;
+  color: #A0FFFF;
+}
+
+.fileSourceUrl:hover {
+  color: #12386f;
 }
 
 .App-body {
   margin-top: 20px;
   padding-left: 30px;
-  color: #A0FFFF;
+  color: #12386f;
 }
 
 .userName {
-  color: gold;
+  color: black;
   font-weight: bold;
 }
 
@@ -69,7 +63,7 @@
   background-color: transparent;
   border: 2px solid #A0FFFF;
   border-radius: 10px;
-  color: gold;
+  color: black;
   font-weight: bold;
   font-family: Courier;
 }
@@ -82,7 +76,7 @@
   background-color: transparent;
   border: 2px solid #A0FFFF;
   border-radius: 10px;
-  color: gold;
+  color: black;
   font-weight: bold;
   font-family: Courier;
 }
@@ -108,8 +102,9 @@
   margin: 3vh 3vh;
   border-radius: 12px;
   padding: 8px;
-  border: 2px solid gold;
-  font-size: 66%;
+  border: 2px solid #12386f;
+  font-size: 80%;
+  color: #A0FFFF;
 }
 
 .urlExamples .urlExample {
@@ -131,18 +126,23 @@ ul.fileList {
 }
 
 .questionBlock {
-  margin: 3vh 3vh;
+  margin: 1vh 3vh;
   border-radius: 12px;
-  padding: 12px 30px;
-  border: 2px solid gold;
-  font-size: 80%;
+  padding: 12px;
+  border: 2px solid purple;
+  font-weight: bold;
 }
 
 .questionBlock > .questionBody {
-  color: magenta;
+  color: #A0FFFF;
+  font-size: 80%;
 }
 
 .questionBlock > .answerBody {
-  color: gold;
-  font-weight: bold;
+  color: #12386f;
+}
+
+hr.fancy {
+  border: 5px solid #4579ac;
+/*  border-radius: 5px;*/
 }

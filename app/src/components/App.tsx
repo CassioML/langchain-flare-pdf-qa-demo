@@ -21,7 +21,7 @@ function App() {
           setPage={setPage}
         />
       </div>
-      <hr />
+      <hr className="fancy" />
       <div className="App-body">
         <SiteContents
           userId={userId}
