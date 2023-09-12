@@ -1,5 +1,4 @@
 import './App.css';
-// import { /*useEffect,*/ useState } from "react"
 import {v4 as uuidv4} from 'uuid';
 import { useForm } from "react-hook-form";
 
@@ -11,8 +10,6 @@ const AskQuestionForm = (props: UserDesc & {completeQuestion: (q_id: string, ans
   const {userId, addQuestion, completeQuestion} = props;
 
   const {register, handleSubmit, reset} = useForm<QuestionSubmission>();
-
-  // const [submitState, setSubmitState] = useState(0); // 0=form idle, 1=submission in flight, 2=last has errored (and form idle)
 
   const onSubmitHandler = (values: QuestionSubmission) => {
     if (values.question) {

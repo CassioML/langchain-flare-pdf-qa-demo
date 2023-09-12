@@ -1,8 +1,9 @@
 import './App.css';
-import { /*useEffect,*/ useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form";
 
 import {UserDesc, FileURLSubmission} from "../interfaces/interfaces";
+import {RequestStatus} from "../interfaces/enums";
 import {submit_url_to_load} from "../utils/api";
 
 const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
@@ -11,11 +12,11 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
 
   const {register, handleSubmit} = useForm<FileURLSubmission>();
 
-  const [submitState, setSubmitState] = useState(0); // 0=form idle, 1=submission in flight, 2=last has errored (and form idle)
+  const [submitState, setSubmitState] = useState<RequestStatus>("initialized");
 
   const onSubmitHandler = (values: FileURLSubmission) => {
     if (values.fileURL) {
-      setSubmitState(1);
+      setSubmitState("in_flight");
       console.log(`AddFileForm submitted, with ${values.fileURL}.`);
       submit_url_to_load(
         userId || "",
@@ -23,25 +24,25 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
         (response: any) => {
           console.log(`Gotten: ${JSON.stringify(response)}`);
           if (response.success){
-            setSubmitState(0);
+            setSubmitState("completed");
             console.log(`Written ${response.n_rows} rows to vector table.`);
             refreshFiles();
           }else{
             console.log("Something went wrong loading the file");
-            setSubmitState(2);
+            setSubmitState("errored");
           }
         },
-        (e: any) => {console.log(e); setSubmitState(2);}
+        (e: any) => {console.log(e); setSubmitState("errored");}
       );
     } else {
       console.log(`AddFileForm submitted but EMPTY INPUT`);
     }
   };
 
-  if (submitState === 0 || submitState === 2){
+  if (submitState === "initialized" || submitState === "errored" || submitState === "completed"){
     return (
       <div>
-        { (submitState === 2) && 
+        { (submitState === "errored") && 
           <div>
             Submission errored!
           </div>
@@ -55,7 +56,7 @@ const AddFileForm = (props: UserDesc & {refreshFiles: () => void}) => {
         </form>
       </div>
     );
-  } else if (submitState === 1){
+  } else if (submitState === "in_flight"){
     return <p>file submitted...</p>
   } else {
     return <p>(trouble with submission form)</p>

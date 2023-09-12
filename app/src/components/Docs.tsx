@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from "react"
 
 import {UserDesc} from "../interfaces/interfaces";
+import {RequestStatus} from "../interfaces/enums";
 import {get_loaded_files, remove_file} from "../utils/api";
 
 import AddFileForm from "./AddFileForm";
@@ -10,24 +11,24 @@ const Docs = (props: UserDesc) => {
 
   const {userId} = props;
 
-  const [queryState, setQueryState] = useState(0); // 0=nothing, 1=querying, 2=done, 3=error
+  const [queryState, setQueryState] = useState<RequestStatus>("initialized");
   const [fileList, setFileList] = useState<string[]>([]);
 
   const refreshFiles = () => {
-    setQueryState(1);
+    setQueryState("in_flight");
     get_loaded_files(
       userId || "",
       (r: string[]) => {
         setFileList(r);
-        setQueryState(2);
+        setQueryState("completed");
       },
-      (e: any) => {console.log(e); setQueryState(3);}
+      (e: any) => {console.log(e); setQueryState("errored");}
     );
   }
 
   const removeFile = (file_name: string) => {
     console.log(`Removing ${file_name}`);
-    setQueryState(1);
+    setQueryState("in_flight");
     remove_file(
       userId || "",
       file_name,
@@ -35,7 +36,7 @@ const Docs = (props: UserDesc) => {
         console.log(`Removed ${r.num_deleted} entries.`);
         refreshFiles();
       },
-      (e: any) => {console.log(e); setQueryState(3);}
+      (e: any) => {console.log(e); setQueryState("errored");}
     );
   }
 
@@ -47,13 +48,13 @@ const Docs = (props: UserDesc) => {
   return (
     <div>
       DOCS FOR {userId}
-      { (queryState === 0) &&
+      { (queryState === "initialized") &&
         <p>(nothing to see here)</p>
       }
-      { (queryState === 1) &&
+      { (queryState === "in_flight") &&
         <p>wait...</p>
       }
-      { (queryState === 2) &&
+      { (queryState === "completed") &&
         <div>RESULTS (<span onClick={refreshFiles}>Reload</span>):
           <ul>
             { fileList.map( (f: string, i: number) => <li key={i}>
@@ -64,7 +65,7 @@ const Docs = (props: UserDesc) => {
           <AddFileForm userId={userId} refreshFiles={refreshFiles} />
         </div>
       }
-      { (queryState === 3) &&
+      { (queryState === "errored") &&
         <p>Error fetching docs</p>
       }
     </div>

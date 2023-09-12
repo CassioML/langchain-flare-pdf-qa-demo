@@ -1,4 +1,4 @@
-import { /*useEffect,*/ useState } from "react"
+import { useState } from "react"
 import { Dispatch, SetStateAction } from "react";
 
 import './App.css';

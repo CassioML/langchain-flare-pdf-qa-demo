@@ -1,6 +1,3 @@
-// import { useEffect, useState } from "react"
-// import { Dispatch, SetStateAction } from "react";
-
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import './App.css';

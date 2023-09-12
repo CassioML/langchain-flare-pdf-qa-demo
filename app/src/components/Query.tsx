@@ -1,5 +1,5 @@
 import './App.css';
-import { /*useEffect,*/ useState } from "react"
+import { useState } from "react"
 import {UserDesc, QuestionAndAnswer} from "../interfaces/interfaces";
 
 import AskQuestionForm from "./AskQuestionForm";
