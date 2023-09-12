@@ -1,6 +1,7 @@
 import shutil
 import tempfile
 import os
+from dotenv import load_dotenv
 from urllib import request
 
 from langchain.embeddings.openai import OpenAIEmbeddings
@@ -10,7 +11,10 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import FlareChain
 from langchain.chat_models import ChatOpenAI
 
+
 VECTOR_PDF_TABLE_NAME = "flare_doc_bank"
+
+load_dotenv("../.env")
 
 embeddingService = None
 chatModel = None

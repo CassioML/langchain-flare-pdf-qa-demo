@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 
 from cassandra.cluster import (
     Cluster,
@@ -6,7 +7,10 @@ from cassandra.cluster import (
 from cassandra.auth import PlainTextAuthProvider
 
 
+load_dotenv("../.env")
+
 astraSession = None
+
 
 def get_astra():
     global astraSession
