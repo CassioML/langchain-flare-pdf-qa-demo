@@ -31,6 +31,9 @@ const SiteContents = (props: UserDesc & {page: any, setPage: any}) => {
           </> )}
         </div>
       </> }
+      { userId === undefined && <>
+        <img className="homeImage" src="squid.jpg" />
+      </> }
     </div>
   );
 }

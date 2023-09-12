@@ -146,3 +146,11 @@ hr.fancy {
   border: 5px solid #4579ac;
 /*  border-radius: 5px;*/
 }
+
+.homeImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
+  margin-top: 5vh;
+}
