@@ -4,11 +4,11 @@ from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 
 from utils.localCORS import permitReactLocalhostClient
-from db import get_astra
+from db import get_db_session
 from ai import get_embeddings, get_vectorstore, load_pdf_from_url, get_chat_model, get_flare_chain
 from users import get_user_store, files_for_user, add_file_to_user, delete_file_from_user
 
-db, keyspace = get_astra()
+db, keyspace = get_db_session()
 embeddings = get_embeddings()
 chatmodel = get_chat_model()
 user_store = get_user_store(db, keyspace)
