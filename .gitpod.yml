@@ -1,0 +1,33 @@
+tasks:
+  - name: app-console
+    before: |
+      cd /workspace/langchain-flare-pdf-qa-demo/app
+      #nvm install 16.13.0
+      #npm install -g npm@latest
+      npm install
+    command: |
+      cd /workspace/langchain-flare-pdf-qa-demo/app
+      REACT_APP_API_BASE_URL=`gp url 8000` npm start
+  - name: api-console
+    before: |
+      cd /workspace/langchain-flare-pdf-qa-demo
+      mkdir .gitpod_logs
+      curl -Ls "https://dtsx.io/get-astra-cli" | bash | tee -a /workspace/langchain-flare-pdf-qa-demo.gitpod_logs/astra-cli-install.log
+      echo -e "\n\n** NOW YOU CAN RUN THE COMMAND scripts/launch_api.sh **"
+    command: /workspace/langchain-flare-pdf-qa-demo/scripts/launch_api.sh
+ports:
+  - port: 3000
+    onOpen: open-preview
+  - port: 8000
+    onOpen: ignore
+    visibility: public
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: false
+    addCheck: true
+    addComment: false
+    addBadge: true
+    addLabel: false

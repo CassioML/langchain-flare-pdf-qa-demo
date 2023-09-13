@@ -9,7 +9,6 @@
   flex-direction: column;
   font-size: 120%;
   font-weight: bold;
-/*  color: #ffffff;*/
 }
 
 .App-identity {
@@ -21,7 +20,6 @@
 
 .App-navbar {
   padding-left: 10px;
-/*  color: #A0FFFF;*/
 }
 
 .App-navbar span {
@@ -87,7 +85,7 @@
   background-color: transparent;
   border: 2px solid #A0FFFF;
   border-radius: 10px;
-  color: #70BFBF;
+  color: #12386f;
   cursor: pointer;
 }
 
@@ -138,13 +136,42 @@ ul.fileList {
   font-size: 80%;
 }
 
+.questionBlock .QAMode {
+  margin-left: 2vh;
+  padding: 5px;
+  color: #12386f;
+  background-color: #A0FFFF;
+  border-radius: 10px;
+  border: 1px solid black;
+}
+
 .questionBlock > .answerBody {
   color: #12386f;
 }
 
+.qaMode {
+  font-variant: small-caps;
+  font-weight: bold;
+  margin-left: 6px;
+  margin-right: 6px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #A0FFFF;
+  border: 1px solid #12386f;
+  color: #12386f;
+}
+
+.unselected {
+  color: #70BFBF;
+}
+
 hr.fancy {
   border: 5px solid #4579ac;
-/*  border-radius: 5px;*/
 }
 
 .homeImage {

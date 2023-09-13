@@ -10,6 +10,8 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import FlareChain
 from langchain.chat_models import ChatOpenAI
+from langchain.llms import OpenAI
+from langchain.indexes.vectorstore import VectorStoreIndexWrapper
 
 
 VECTOR_PDF_TABLE_NAME = "flare_doc_bank"
@@ -18,6 +20,7 @@ load_dotenv("../.env")
 
 embeddingService = None
 chatModel = None
+llm = None
 
 
 def get_chat_model():
@@ -25,6 +28,13 @@ def get_chat_model():
     if chatModel is None:
         chatModel = ChatOpenAI(temperature=0)
     return chatModel
+
+
+def get_llm():
+    global llm
+    if llm is None:
+        llm = OpenAI(temperature=0)
+    return llm
 
 
 def get_flare_chain(chmodel, vstore):
@@ -43,6 +53,12 @@ def get_embeddings():
     if embeddingService is None:
         embeddingService = OpenAIEmbeddings()
     return embeddingService
+
+
+def get_rag_index(embeddings, db, keyspace, user_id):
+    vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=user_id)
+    rag_index = VectorStoreIndexWrapper(vectorstore=vectorstore_u)
+    return rag_index
 
 
 def get_vectorstore(embeddings, db, ks, user_id=None):
