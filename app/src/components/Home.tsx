@@ -10,7 +10,7 @@ const Home = (props: UserDesc) => {
       <p>Welcome, <span className="userName">{userId}</span>.</p>
       <p>This demo is about:</p>
       <ul>
-        <li>LangChain's FLARE question-answering</li>
+        <li>LangChain's <a href="https://arxiv.org/abs/2305.06983" target="blank;">FLARE</a> question-answering</li>
         <li>Ingestion of PDF documents</li>
         <li>Astra as a vector store, <i>partitioned per-user</i></li>
         <li>API: Python (LangChain, CassIO, FastAPI)</li>

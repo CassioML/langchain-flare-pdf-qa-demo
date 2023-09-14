@@ -12,6 +12,8 @@ Features:
 - Other Q-A methods in comparison
 - Start-with-a-click on Gitpod
 
+For some architectural/flow diagrams, check out [this dir](images/diagrams).
+
 ## Prerequisites
 
 You need:
