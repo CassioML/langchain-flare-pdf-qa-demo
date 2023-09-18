@@ -1,0 +1,19 @@
+{
+  "name": "PDF FLARE demo with Langchain and Cassandra as Vector Store",
+  "description": "Ingest PDF files from their URL into an Astra DB vector store and run FLARE Question-Answering on them. (1) Python API (CassIO, LangChain, FastAPI) + React client (Typescript); (2) per-user store of ingested documents; (3) Other Q-A methods in comparison; (4) Start-with-a-click on Gitpod",
+  "duration": "20 minutes",
+  "skillLevel": "Intermediate",
+  "language":["javascript", "python"],
+  "stack":["cassio", "python", "cassandra", "react", "typescript", "fastAPI"],
+  "githubUrl": "https://github.com/cassioml/langchain-flare-pdf-qa-demo",
+  "tags": [
+    { "name":"cassandra" },
+    { "name":"astradb" },
+    { "name":"vector" },
+    { "name":"vectordb" },
+    { "name":"cassio" },
+    { "name":"flare" }
+  ],
+  "category": "starters",
+  "usecases": ["GenAI", "Question answering", "LLM", "Chatbots"]
+}
