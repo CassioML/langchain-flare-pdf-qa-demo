@@ -6,6 +6,7 @@
   "language":["javascript", "python"],
   "stack":["cassio", "python", "cassandra", "react", "typescript", "fastAPI"],
   "githubUrl": "https://github.com/cassioml/langchain-flare-pdf-qa-demo",
+  "gitpodUrl": "https://gitpod.io/#https://github.com/cassioml/langchain-flare-pdf-qa-demo",
   "tags": [
     { "name":"cassandra" },
     { "name":"astradb" },
