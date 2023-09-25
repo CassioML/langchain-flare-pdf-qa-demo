@@ -4,8 +4,6 @@ DOTENV="$1"
 
 clear
 echo    "=========================="
-while [ -z "$OPENAI_KEY" ]; do
-  read -p "Enter your OpenAI API Key: " OPENAI_KEY
-done
+OPENAI_KEY="$(/workspace/langchain-flare-pdf-qa-demo/scripts/read_and_output_nonempty_secret.sh "Enter your OpenAI API Key")";
 
 echo -e "\n\nOPENAI_API_KEY=\"${OPENAI_KEY}\"" >> "$DOTENV"

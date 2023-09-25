@@ -24,9 +24,9 @@ You need:
 ## How-to (Gitpod)
 
 Click this button, confirm opening of the workspace
-(you might need a Gitpod login in the process) and wait a little
-for a prompt saying that you can run `scripts/launch_api.sh`.
-Do so and provide the secrets when prompted.
+(you might need to do a Gitpod login in the process) and wait a 1-2 minutes:
+instructions will show up in the console below, where you'll have
+to provide secrets when prompted.
 
 In the meantime, the app will open in the top panel.
 
