@@ -4,6 +4,7 @@ source /home/gitpod/.astra/cli/astra-init.sh
 clear
 echo    "=========================="
 ASTRA_TOKEN="$(/workspace/langchain-flare-pdf-qa-demo/scripts/read_and_output_nonempty_secret.sh "Enter your Astra Token")";
+echo -e "\nOK"
 astra setup -t "${ASTRA_TOKEN}"
 DB_NAMES=`astra db list -o json | jq -r ' .data[] | select( .V != "") | select( .Status == "ACTIVE" ) | .Name '`
 # are there exactly 1 DB?
