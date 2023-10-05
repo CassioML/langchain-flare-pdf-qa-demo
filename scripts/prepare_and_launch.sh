@@ -14,7 +14,7 @@ if [ "${NUM_DBS}" -eq "1" ]; then
 else
   if [ "${NUM_DBS}" -eq "0" ]; then
     echo "ERROR: No active vector database found. Please rectify and launch this again:";
-    echo "    /workspace/langchain-flare-pdf-qa-demo/scripts/launch_api.sh";
+    echo "    /workspace/langchain-flare-pdf-qa-demo/scripts/prepare_and_launch.sh";
     exit 0;
   else
     echo "Choose your target vector database (enter number):";
