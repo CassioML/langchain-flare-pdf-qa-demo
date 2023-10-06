@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 
 from utils.localCORS import permitReactLocalhostClient
-from db import get_db_session
+from db import set_db_session
 from ai import (
     get_embeddings,
     get_vectorstore,
@@ -21,11 +21,11 @@ from users import (
     delete_file_from_user,
 )
 
-db, keyspace = get_db_session()
+set_db_session()
 embeddings = get_embeddings()
 chatmodel = get_chat_model()
 llm = get_llm()
-user_store = get_user_store(db, keyspace)
+user_store = get_user_store()
 
 class ListFileRequest(BaseModel):
     user_id: str
@@ -47,16 +47,8 @@ class RemovePDFRequest(BaseModel):
 
 app = FastAPI()
 permitReactLocalhostClient(app)
-_ = get_vectorstore(embeddings, db, keyspace)
+_ = get_vectorstore(embeddings)
 
-
-@app.get('/')
-def index():
-    return {
-        'db': str(db),
-        'keyspace': str(keyspace),
-        'embeddings': str(embeddings),
-    }
 
 
 @app.post('/list_files')
@@ -67,7 +59,7 @@ def list_files(payload: ListFileRequest):
 @app.post('/load_pdf_url')
 def load_pdf_url(payload: LoadPDFRequest):
     try:
-        vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=payload.user_id)
+        vectorstore_u = get_vectorstore(embeddings, user_id=payload.user_id)
         n_rows, file_name = load_pdf_from_url(payload.file_url, vectorstore_u)
         if n_rows is not None:
             add_file_to_user(user_store, payload.user_id, file_name, payload.file_url)
@@ -88,7 +80,7 @@ def load_pdf_url(payload: LoadPDFRequest):
 @app.post('/remove_pdf')
 def remove_pdf(payload: RemovePDFRequest):
     try:
-        vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=payload.user_id)
+        vectorstore_u = get_vectorstore(embeddings, user_id=payload.user_id)
         num_deleted = vectorstore_u.vector_table.find_and_delete_entries(metadata={"source": payload.file_name})
         delete_file_from_user(user_store, payload.user_id, payload.file_name)
         return {
@@ -105,7 +97,7 @@ def remove_pdf(payload: RemovePDFRequest):
 @app.post('/flare_ask')
 def flare_ask(payload: QuestionRequest):
     try:
-        vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=payload.user_id)
+        vectorstore_u = get_vectorstore(embeddings, user_id=payload.user_id)
         flarechain_u = get_flare_chain(chatmodel, vectorstore_u)
         result = flarechain_u.run(payload.question)
         return {
@@ -124,7 +116,7 @@ def flare_ask(payload: QuestionRequest):
 @app.post('/rag_ask')
 def llm_ask(payload: QuestionRequest):
     try:
-        rag_index = get_rag_index(embeddings, db, keyspace, user_id=payload.user_id)
+        rag_index = get_rag_index(embeddings, user_id=payload.user_id)
         result = rag_index.query(payload.question, llm=llm).strip()
         return {
             "question_id": payload.question_id,

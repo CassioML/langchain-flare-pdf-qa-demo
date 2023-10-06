@@ -7,12 +7,10 @@ USER_TABLE_NAME = "flare_users"
 
 userStore = None
 
-def get_user_store(db, ks):
+def get_user_store():
     global userStore
     if userStore is None:
         userStore = ClusteredCassandraTable(
-            session=db,
-            keyspace=ks,
             table=USER_TABLE_NAME,
             primary_key_type=["TEXT", "TEXT"],
             ordering_in_partition="ASC",

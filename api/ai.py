@@ -55,13 +55,13 @@ def get_embeddings():
     return embeddingService
 
 
-def get_rag_index(embeddings, db, keyspace, user_id):
-    vectorstore_u = get_vectorstore(embeddings, db, keyspace, user_id=user_id)
+def get_rag_index(embeddings, user_id):
+    vectorstore_u = get_vectorstore(embeddings, user_id=user_id)
     rag_index = VectorStoreIndexWrapper(vectorstore=vectorstore_u)
     return rag_index
 
 
-def get_vectorstore(embeddings, db, ks, user_id=None):
+def get_vectorstore(embeddings, user_id=None):
     """
     if user_id is None,
         we assume this is an init call:
@@ -71,8 +71,6 @@ def get_vectorstore(embeddings, db, ks, user_id=None):
     """
     vectorStore = Cassandra(
         embedding=embeddings,
-        session=db,
-        keyspace=ks,
         table_name=VECTOR_PDF_TABLE_NAME,
         partition_id="placeholder" if user_id is None else user_id,
         partitioned=True,
