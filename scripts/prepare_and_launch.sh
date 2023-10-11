@@ -2,7 +2,7 @@
 
 REPO_HOME="/workspace/langchain-flare-pdf-qa-demo"
 
-source /home/gitpod/.astra/cli/astra-init.sh
+# source /home/gitpod/.astra/cli/astra-init.sh
 clear
 echo    "=========================="
 
