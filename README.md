@@ -22,6 +22,19 @@ You need:
 - likewise, get your [Database ID](https://awesome-astra.github.io/docs/pages/astra/faq/#where-should-i-find-a-database-identifier) ready, you will have to enter it;
 - an **OpenAI API Key**. (More info [here](https://cassio.org/start_here/#llm-access), note that out-of-the-box this demo supports OpenAI unless you tinker with the code.)
 
+<details><summary><i>Note:</i> If you have switched Astra to the <b>New Vector Developer Experience UI</b>, click here for instructions on the DB credentials.
+</summary>
+
+Go to your database dashboard and click on the "Connection Details" button on the right. A dialog will open with instructions for connecting. You'll do two things:
+
+- click "Generate Token" and copy the `AstraCS:...` string in its entirety once that appears on the dialog;
+- locate the `api_endpoint=...` line in the Python code example. The database ID is the sequence after `https://` and before the dash + region name (e.g. `-us-east1`) in the definition of the endpoint. It looks like `01234567-89ab-cdef-0123-456789abcdef` (and has always this length).
+
+![DB credentials in the Vector Developer Experience](images/new_vector_ui.png)
+
+</details>
+
+
 ## How-to (Gitpod)
 
 Click this button, confirm opening of the workspace
